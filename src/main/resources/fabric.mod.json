@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "allergymod",
+  "version": "${version}",
+  "name": "Allergic to Tools",
+  "description": "Holding tools too long gives you poison. Craft an EpiPen to cure it!",
+  "authors": ["YourName"],
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.example.allergymod.AllergyMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}
