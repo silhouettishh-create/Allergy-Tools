@@ -6,8 +6,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,13 +42,13 @@ public class AllergyTickHandler {
     }
 
     private static boolean isTool(Item item) {
-        // TieredItem covers all pickaxes, axes, shovels, hoes, swords
-        if (item instanceof TieredItem) return true;
-
-        String name = item.getClass().getSimpleName().toLowerCase();
-        return name.contains("fishing") || name.contains("shears")
-                || name.contains("flintandsteel") || name.contains("bow")
-                || name.contains("crossbow") || name.contains("trident")
-                || name.contains("shield") || name.contains("brush");
+        String cls = item.getClass().getName().toLowerCase();
+        return cls.contains("pickaxe") || cls.contains("axe")
+                || cls.contains("shovel") || cls.contains("hoe")
+                || cls.contains("sword") || cls.contains("fishing")
+                || cls.contains("shears") || cls.contains("flintandsteel")
+                || cls.contains("bow") || cls.contains("crossbow")
+                || cls.contains("trident") || cls.contains("shield")
+                || cls.contains("brush");
     }
 }
