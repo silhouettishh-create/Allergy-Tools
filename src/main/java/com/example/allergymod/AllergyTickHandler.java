@@ -4,7 +4,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +31,6 @@ public class AllergyTickHandler {
                     player.addEffect(new MobEffectInstance(
                             MobEffects.POISON, Integer.MAX_VALUE, 0));
                 }
-            } else {
-                // Reset timer when not holding a tool
-                TOOL_TICKS.put(id, TOOL_TICKS.getOrDefault(id, 0));
             }
         }
     }
@@ -44,15 +44,13 @@ public class AllergyTickHandler {
     }
 
     private static boolean isTool(Item item) {
-        return item instanceof net.minecraft.world.item.DiggerItem
-                || item instanceof net.minecraft.world.item.SwordItem
-                || item instanceof net.minecraft.world.item.FishingRodItem
-                || item instanceof net.minecraft.world.item.ShearsItem
-                || item instanceof net.minecraft.world.item.FlintAndSteelItem
-                || item instanceof net.minecraft.world.item.BowItem
-                || item instanceof net.minecraft.world.item.CrossbowItem
-                || item instanceof net.minecraft.world.item.TridentItem
-                || item instanceof net.minecraft.world.item.ShieldItem
-                || item instanceof net.minecraft.world.item.BrushItem;
+        // TieredItem covers all pickaxes, axes, shovels, hoes, swords
+        if (item instanceof TieredItem) return true;
+
+        String name = item.getClass().getSimpleName().toLowerCase();
+        return name.contains("fishing") || name.contains("shears")
+                || name.contains("flintandsteel") || name.contains("bow")
+                || name.contains("crossbow") || name.contains("trident")
+                || name.contains("shield") || name.contains("brush");
     }
 }
