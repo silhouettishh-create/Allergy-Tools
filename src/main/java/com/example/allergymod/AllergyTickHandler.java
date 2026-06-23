@@ -28,6 +28,9 @@ public class AllergyTickHandler {
                     player.addEffect(new MobEffectInstance(
                             MobEffects.POISON, Integer.MAX_VALUE, 0));
                 }
+            } else {
+                // Reset timer when not holding a tool
+                TOOL_TICKS.put(id, TOOL_TICKS.getOrDefault(id, 0));
             }
         }
     }
@@ -41,15 +44,15 @@ public class AllergyTickHandler {
     }
 
     private static boolean isTool(Item item) {
-        return item instanceof DiggerItem
-                || item instanceof SwordItem
-                || item instanceof FishingRodItem
-                || item instanceof ShearsItem
-                || item instanceof FlintAndSteelItem
-                || item instanceof BowItem
-                || item instanceof CrossbowItem
-                || item instanceof TridentItem
-                || item instanceof ShieldItem
-                || item instanceof BrushItem;
+        return item instanceof net.minecraft.world.item.DiggerItem
+                || item instanceof net.minecraft.world.item.SwordItem
+                || item instanceof net.minecraft.world.item.FishingRodItem
+                || item instanceof net.minecraft.world.item.ShearsItem
+                || item instanceof net.minecraft.world.item.FlintAndSteelItem
+                || item instanceof net.minecraft.world.item.BowItem
+                || item instanceof net.minecraft.world.item.CrossbowItem
+                || item instanceof net.minecraft.world.item.TridentItem
+                || item instanceof net.minecraft.world.item.ShieldItem
+                || item instanceof net.minecraft.world.item.BrushItem;
     }
 }
